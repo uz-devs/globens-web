@@ -81,8 +81,8 @@ def publish_product(gb_product):
     get_db_connection().commit()
 
 
-def remove_product_publish_request(gb_request):
+def remove_product_publish_request(gb_product):
     cur = get_db_connection().cursor(cursor_factory=psycopg2_extras.DictCursor)
-    cur.execute('delete from "gb_product_publish_request" where "product_id"=%s;', (gb_request['product_id'],))
+    cur.execute('delete from "gb_product_publish_request" where "product_id"=%s;', (gb_product['id'],))
     cur.close()
     get_db_connection().commit()

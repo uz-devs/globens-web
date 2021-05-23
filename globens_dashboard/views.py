@@ -75,7 +75,7 @@ def handle_product_approve(request):
     if 'product_id' in request.GET and str(request.GET['product_id']).isnumeric():
         gb_product = db.get_product(product_id=int(request.GET['product_id']))
         db.publish_product(gb_product=gb_product)
-        db.remove_product_publish_request(gb_request=gb_product)
+        db.remove_product_publish_request(gb_product=gb_product)
     return redirect(to='main-page')
 
 
@@ -84,5 +84,5 @@ def handle_product_approve(request):
 def handle_product_disapprove(request):
     if 'product_id' in request.GET and str(request.GET['product_id']).isnumeric():
         gb_product = db.get_product(product_id=int(request.GET['product_id']))
-        db.remove_product_publish_request(gb_request=gb_product)
+        db.remove_product_publish_request(gb_product=gb_product)
     return redirect(to='main-page')
