@@ -36,8 +36,48 @@ def handle_logout_api(request):
 @login_required
 @require_http_methods(['GET'])
 def handle_main_page(request):
-    return render(
-        request=request,
-        template_name='main_page.html',
-        context={'title': 'Globens dashboard'}
-    )
+    if len(request.user.username) > 2:
+        country_code = request.user.username[-3:]
+        publish_requests = []
+        for gb_request in db.get_product_publish_requests(country_code=country_code):
+            gb_product = db.get_product(product_id=gb_request['product_id'])
+            gb_business_page = db.get_business_page(business_page_id=gb_request['business_page_id'])
+            gb_requester_user = db.get_user(user_id=gb_request['requester_user_id'])
+            publish_requests += [{
+                'time': gb_request['timestamp'].strftime('%m/%d (%a), %I:%M %p'),
+                'product_id': gb_product['id'],
+                'product_name': gb_product['name'],
+                'business_page_name': gb_business_page['title'],
+                'requester_user_email': gb_requester_user['email']
+            }]
+        return render(
+            request=request,
+            template_name='main_page.html',
+            context={
+                'title': 'Globens dashboard',
+                'publish_requests': publish_requests
+            }
+        )
+    else:
+        return redirect(to='logout')
+
+
+@login_required
+@require_http_methods(['GET'])
+def handle_contents_page(request):
+    # todo implement (google drive url view)
+    return redirect(to='main-page')
+
+
+@login_required
+@require_http_methods(['GET'])
+def handle_product_approve(request):
+    # todo implement
+    return redirect(to='main-page')
+
+
+@login_required
+@require_http_methods(['GET'])
+def handle_product_disapprove(request):
+    # todo implement
+    return redirect(to='main-page')

@@ -1,5 +1,131 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <h1>Globens dashboard - main page</h1>
     <a href="{% url 'logout' %}" style="text-decoration: none; cursor: pointer;">LOGOUT</a>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th class="time">Time</th>
+            <th class="product_name">Product name</th>
+            <th class="business_page_name">Business page title</th>
+            <th class="requester_user_email">Requester email</th>
+            <th class="actions_column">Approve/Disapprove</th>
+        </tr>
+        {% for publish_request in publish_requests %}
+            <tr>
+                <td class="time" data-href="{% url 'contents-page' %}?product_id={{ publish_request.product_id }}">{{ publish_request.time }}</td>
+                <td class="product_name" data-href="{% url 'contents-page' %}?product_id={{ publish_request.product_id }}">{{ publish_request.product_name }}</td>
+                <td class="business_page_name" data-href="{% url 'contents-page' %}?product_id={{ publish_request.product_id }}">{{ publish_request.business_page_name }}</td>
+                <td class="requester_user_email" data-href="{% url 'contents-page' %}?product_id={{ publish_request.product_id }}">{{ publish_request.requester_user_email }}</td>
+
+                <td class="actions_column">
+                    <a title="Approve" href="{% url 'approve' %}?product_id={{ publish_request.product_id }}&edit">
+                        <img class="action_button_green" src="{% static 'approve.png' %}" alt="approve">
+                    </a>
+                    <a title="Disapprove" href="{% url 'disapprove' %}?product_id={{ publish_request.product_id }}">
+                        <img class="action_button_red" src="{% static 'disapprove.png' %}" alt="disapprove">
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <style>
+        table {
+            color: #333;
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            table-layout: fixed;
+        }
+
+        .time {
+            width: 10%;
+        }
+
+        .product_name {
+            width: 30%;
+        }
+
+        .business_page_name {
+            width: 20%
+        }
+
+        .requester_user_email {
+            width: 20%
+        }
+
+        .actions_column {
+            width: 20%
+        }
+
+        td, th {
+            border: 1px solid transparent; /* No more visible border */
+            height: 30px;
+        }
+
+        th {
+            background: #4285F4; /* #F1F1F1; /* Darken header a bit */
+            color: white;
+            font-weight: bold;
+            padding: 10px 0;
+            font-size: large;
+        }
+
+        td {
+            background: white;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Cells in even rows (2,4,6...) are one color */
+        tr:nth-child(even) td {
+            background: white;
+        }
+
+        /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
+        tr:nth-child(odd) td {
+            background: #DFDFDF;
+        }
+
+        tr:not(:first-child):hover td {
+            background: #666;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img.action_button_green {
+            background: #2ecc71;
+            vertical-align: middle;
+            padding: 3px;
+            margin: 2px 0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: larger;
+            cursor: pointer;
+        }
+
+        img.action_button_red {
+            background: orangered;
+            vertical-align: middle;
+            padding: 3px;
+            margin: 2px 0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: larger;
+            cursor: pointer;
+        }
+
+        img.action_button_green:hover, img.action_button_red:hover {
+            background: #4285F4;
+            color: black;
+        }
+    </style>
 {% endblock %}

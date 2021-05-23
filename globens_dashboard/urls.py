@@ -21,6 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', views.handle_main_page, name='main-page'),
+    path('contents/', views.handle_contents_page, name='contents-page'),
+    path('approve/', views.handle_product_approve, name='approve'),
+    path('disapprove/', views.handle_product_disapprove, name='disapprove'),
+
     path('accounts/login/', views.handle_login_api, name='login'),
     path('accounts/logout/', views.handle_logout_api, name='logout'),
 ]
