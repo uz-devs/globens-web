@@ -72,12 +72,17 @@ def handle_contents_page(request):
 @login_required
 @require_http_methods(['GET'])
 def handle_product_approve(request):
-    # todo implement
+    if 'product_id' in request.GET and str(request.GET['product_id']).isnumeric():
+        gb_product = db.get_product(product_id=int(request.GET['product_id']))
+        db.publish_product(gb_product=gb_product)
+        db.remove_product_publish_request(gb_request=gb_product)
     return redirect(to='main-page')
 
 
 @login_required
 @require_http_methods(['GET'])
 def handle_product_disapprove(request):
-    # todo implement
+    if 'product_id' in request.GET and str(request.GET['product_id']).isnumeric():
+        gb_product = db.get_product(product_id=int(request.GET['product_id']))
+        db.remove_product_publish_request(gb_request=gb_product)
     return redirect(to='main-page')

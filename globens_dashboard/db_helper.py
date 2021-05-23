@@ -73,12 +73,10 @@ def get_product_publish_requests(country_code):
 
 def publish_product(gb_product):
     cur = get_db_connection().cursor(cursor_factory=psycopg2_extras.DictCursor)
-
     cur.execute('update "gb_product" set "published" = %s where "id"=%s;', (
         True,
         gb_product['id']
     ))
-
     cur.close()
     get_db_connection().commit()
 
