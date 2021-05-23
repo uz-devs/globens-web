@@ -21,16 +21,16 @@ def handle_login_api(request):
             dj_login(request, user)
             return redirect(to='main-page')
         else:
-            return redirect(to='login-page')
+            return redirect(to='login')
     else:
-        return redirect(to='login-page')
+        return redirect(to='login')
 
 
 @login_required
 @require_http_methods(['GET', 'POST'])
 def handle_logout_api(request):
     dj_logout(request=request)
-    return redirect(to='login-page')
+    return redirect(to='login')
 
 
 @login_required
