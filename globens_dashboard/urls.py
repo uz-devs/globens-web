@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', views.handle_main_page, name='main-page'),
-    path('login/', views.handle_login_api, name='login-page'),
-    path('logout/', views.handle_logout_api, name='logout-api'),
+    path('accounts/login/', views.handle_login_api, name='login-page'),
+    path('accounts/logout/', views.handle_logout_api, name='logout-api'),
 ]
