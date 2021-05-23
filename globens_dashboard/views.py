@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as dj_logout
 from django.contrib.auth import login as dj_login
 from django.shortcuts import render, redirect
-import db_helper as db
+from . import db_helper as db
 
 
 @require_http_methods(['GET', 'POST'])
