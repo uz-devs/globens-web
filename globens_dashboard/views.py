@@ -7,6 +7,10 @@ from django.shortcuts import render, redirect
 from . import db_helper as db
 
 
+def handle_privacy_policy(request):
+    return render(request=request, template_name='pp.html')
+
+
 @require_http_methods(['GET', 'POST'])
 def handle_login_api(request):
     if request.method == 'GET':

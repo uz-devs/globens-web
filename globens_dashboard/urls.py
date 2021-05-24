@@ -20,6 +20,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('pp/', views.handle_privacy_policy, name='privacy-policy'),
+
     path('', views.handle_main_page, name='main-page'),
     path('contents/', views.handle_contents_page, name='contents-page'),
     path('approve/', views.handle_product_approve, name='approve'),
