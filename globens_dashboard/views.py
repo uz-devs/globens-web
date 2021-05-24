@@ -94,3 +94,9 @@ def handle_product_disapprove(request):
         gb_product = db.get_product(product_id=int(request.GET['product_id']))
         db.remove_product_publish_request(gb_product=gb_product)
     return redirect(to='main-page')
+
+
+def handle_welcome_message(request):
+    return render(request=request, template_name='welcome_page.html', context={
+        'title': 'Globens'
+    })
