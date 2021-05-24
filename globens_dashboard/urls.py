@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('pp/', views.handle_privacy_policy, name='privacy-policy'),
+    path('google266755eceb2daa77.html', views.handle_domain_ownership_html),
 
     path('', views.handle_main_page, name='main-page'),
     path('contents/', views.handle_contents_page, name='contents-page'),

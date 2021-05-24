@@ -11,6 +11,10 @@ def handle_privacy_policy(request):
     return render(request=request, template_name='pp.html')
 
 
+def handle_domain_ownership_html(request):
+    return render(request=request, template_name='google266755eceb2daa77.html')
+
+
 @require_http_methods(['GET', 'POST'])
 def handle_login_api(request):
     if request.method == 'GET':
