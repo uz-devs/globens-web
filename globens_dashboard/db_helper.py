@@ -4,16 +4,26 @@ import psycopg2
 db_conn = None
 
 
+
 def get_db_connection():
     global db_conn
-    if db_conn is None:
+    reconnect = db_conn is None
+
+    if not reconnect:
+        try:
+            db_conn.cursor().execute('select 1;')
+        except psycopg2.OperationalError:
+            reconnect = True
+
+    if reconnect:
         db_conn = psycopg2.connect(
             host='globens-db.cssqpqimlbjy.ap-northeast-2.rds.amazonaws.com',
             database='globens_db',
             user='postgres',
             password='postgres'
         )
-        print('database initialized', db_conn)
+        print('database (re)initialized', settings.db_conn)
+
     return db_conn
 
 
