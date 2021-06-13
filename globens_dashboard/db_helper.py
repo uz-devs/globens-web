@@ -4,7 +4,6 @@ import psycopg2
 db_conn = None
 
 
-
 def get_db_connection():
     global db_conn
     reconnect = db_conn is None
@@ -22,7 +21,7 @@ def get_db_connection():
             user='postgres',
             password='postgres'
         )
-        print('database (re)initialized', settings.db_conn)
+        print('database (re)initialized', db_conn)
 
     return db_conn
 
